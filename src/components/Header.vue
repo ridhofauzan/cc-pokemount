@@ -3,10 +3,10 @@
         <div class="poke-logo">
             <img class="poke-logo__img" src="./../assets/logo/pokemon.png" alt="">
         </div>
-        <ul class="poke-menu">
+        <!-- <ul class="poke-menu">
             <li><router-link to="/">Home</router-link></li>
             <li><router-link to="/list">List</router-link></li>
-        </ul> 
+        </ul>  -->
     </div>
 </template>
 

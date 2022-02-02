@@ -1,24 +1,23 @@
-import { reactive, getCurrentInstance } from 'vue'
+import { reactive, toRefs } from 'vue'
 
-export default function usePokemon() {
-    const internalInstance = getCurrentInstance()
-
-    const axios =internalInstance.appContext.config.globalProperties.axios;
-
+export default function usePokemons() {
     const state_pokemon = reactive({
         error: null,
-        data: []
+        pokemons: null,
+        loaded: false,
+        loading: false
     })
-    const load = (async() => {
-        try {
-            let response = await axios.get('https://pokeapi.co/api/v2/pokemon')
-            state_pokemon.data = response.data
-        } catch (e) {
-            // state_pokemon.error = e.response.data
-        }
-    })
-    
-    load()
+    const load = async() => {
+        if(!state_pokemon.loaded) {
+            try {
+                const response = await fetch('https://pokeapi.co/api/v2/pokemon')
+                state_pokemon.pokemons = await response.json();
 
-    return { state_pokemon }
+            } catch (e) {
+                state_pokemon.error = e;
+            }
+        }
+    };
+
+    return { ...toRefs(state_pokemon), load }
 }

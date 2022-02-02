@@ -1,36 +1,58 @@
 <template>
-    <div class="poke-item">
-        <div class="poke-item-box">
+    <div class="poke-item" @click="showDetail">
+        <div class="poke-item-box" >
             <div class="poke-item__title">
-                {{ poke_name }}
+                {{ pokemon.name }}
             </div>
         </div>
+        <!-- <ItemDetail v-if=""/> -->
     </div>
 </template>
 
 <script>
+// import ItemDetail from './ItemDetail.vue'
+import usePokemonDetail from '@/modules/usePokemonDetail'
 export default {
     props: {
-        poke_name: String
+        pokemon: Object
+    },
+    components: {
+        // ItemDetail
+    },
+    async setup(props) {
+        const { pokemon_detail, error, load } = usePokemonDetail()
+
+        function showDetail() { 
+            load(props.pokemon.name)
+        }
+
+        return { pokemon_detail, error, showDetail }
     }
 }
-// import { ref } from 'vue'
-
-// defineProps({
-// //   msg: String
-// })
-
-// const count = ref(0)
 </script>
 
 <style lang="scss">
+$small: 325px;
+$medium: 700px;
 .poke {
     &-item {
         padding: 5px;
-        display: inline-flex;
+        display: block;
+        @media screen and (max-width: $small) {
+            display: block;
+        }
+        @media screen and (min-width: $medium) {
+            display: inline-flex;                 
+        }
         &-box {
+            @media screen and (max-width: $small) {
+                width: calc(100% - 40px);
+            }
+            @media screen and (min-width: $medium) {
+                width: 100px;               
+            }
             padding: 16px;
-            width: 100px;
+            width: 100%;
             border-radius: 8px;
             background: #ffffff;
             box-shadow: 2px 2px 5px #888888;
