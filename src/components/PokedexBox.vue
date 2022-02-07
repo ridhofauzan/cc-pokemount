@@ -1,8 +1,9 @@
 <template>
     <router-link class="poke-item" :to="`/pokedex/${pokemon.name}`">
         <div class="poke-item-box" >
+            <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId + 1}.png`" alt="">
             <div class="poke-item__title">
-                {{ pokemon.name }}
+                {{ convStrCamel(pokemon.name) }}
             </div>
         </div>
         <!-- <ItemDetail v-if=""/> -->
@@ -12,9 +13,12 @@
 <script>
 // import ItemDetail from './ItemDetail.vue'
 import usePokemonDetail from '@/modules/usePokemonDetail'
+import StringFilter from '../mixins/string-filter'
 export default {
+    mixins: [StringFilter],
     props: {
-        pokemon: Object
+        pokemon: Object,
+        pokeId: Number
     },
     components: {
         // ItemDetail

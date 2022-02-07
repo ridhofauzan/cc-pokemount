@@ -7,14 +7,17 @@ export default function usePokemonDetail() {
         loaded: false,
         loading: false
     })
-    const load = async(param) => {
-        try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${param}`)
-            state_pokemon_detail.pokemon_detail = await response.json();
-            console.log(state_pokemon_detail.pokemon_detail)
-        } catch (e) {
-            state_pokemon_detail.error = e;
-        }
+    const load = async (param) => {
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + 
+                                        param, {
+                                            method: "get",
+                                        })
+                                    .then(
+                                        r => r.json()
+                                    );
+            //fetch(`https://pokeapi.co/api/v2/pokemon/${param}`, )
+            state_pokemon_detail.pokemon_detail = response;
+            // console.log(state_pokemon_detail.pokemon_detail)
     };
 
     return { ...toRefs(state_pokemon_detail), load }

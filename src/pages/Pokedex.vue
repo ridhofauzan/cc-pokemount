@@ -5,7 +5,7 @@
                 <PokedexList />
             </template>
             <template #fallback>
-                <div>Loading Pokemon...</div>
+                <Loading />
             </template>
         </Suspense>
     </div>
@@ -13,11 +13,13 @@
 
 <script>
 import PokedexList from './../components/PokedexList.vue'
+import Loading from './../components/Loading.vue'
 import { ref, onErrorCaptured } from "vue";
 
 export default {
     components: {
-        PokedexList: PokedexList
+        PokedexList,
+        Loading
     },
     setup() {
         const error = ref(null);

@@ -1,7 +1,7 @@
 <template>
     <div class="poke-wrap">
         <div v-if="error">{{ error }}</div>
-        <AsyncPokemon v-for="pokemon in pokemons.results" :pokemon="pokemon" :key="pokemon.id" />
+        <AsyncPokemon v-for="(pokemon, index) in pokemons.results" :pokemon="pokemon" :key="index" :pokeId="index" />
     </div>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
     <div class="poke-wrap">
+        <!-- {{ pokemon_detail.name }} -->
         <AsyncPokemonDetail :pokemon="pokemon_detail" />
     </div>
 </template>
@@ -7,7 +8,7 @@
 <script>
 import { defineAsyncComponent } from "vue";
 import Loading from "./Loading.vue";
-import usePokemonDetail from '@/modules/usePokemonDetail'
+// import usePokemonDetail from '@/modules/usePokemonDetail'
 import { useRoute } from 'vue-router'
 
 const AsyncPokemonDetail = defineAsyncComponent({
@@ -25,11 +26,18 @@ export default {
         const { 
             params: { pokeId },
         } = useRoute()
-        const { pokemon_detail, error, load } = usePokemonDetail()
 
-        load(pokeId)
+        // const { pokemon_detail, error, load } = usePokemonDetail()
 
-        return { pokemon_detail, error }
+        // load(pokeId)
+
+        // return { pokemon_detail, error }
+        const pokemon_detail = await fetch("https://pokeapi.co/api/v2/pokemon/" + 
+            pokeId, {
+              method: "get",
+            }).then(r => r.json());
+
+        return { pokemon_detail }
     }
 }
 </script>
