@@ -1,12 +1,12 @@
 <template>
-    <div class="poke-item" @click="showDetail">
+    <router-link class="poke-item" :to="`/pokedex/${pokemon.name}`">
         <div class="poke-item-box" >
             <div class="poke-item__title">
                 {{ pokemon.name }}
             </div>
         </div>
         <!-- <ItemDetail v-if=""/> -->
-    </div>
+    </router-link>
 </template>
 
 <script>
@@ -38,6 +38,7 @@ $medium: 700px;
     &-item {
         padding: 5px;
         display: block;
+        text-decoration: none;
         @media screen and (max-width: $small) {
             display: block;
         }
@@ -51,11 +52,12 @@ $medium: 700px;
             @media screen and (min-width: $medium) {
                 width: 100px;               
             }
+            text-decoration: none;
+            color: #333;
             padding: 16px;
             width: 100%;
-            border-radius: 8px;
+            border-radius: 16px;
             background: #ffffff;
-            box-shadow: 2px 2px 5px #888888;
             border: none;
             font-size: 14px;
             font-weight: bold;

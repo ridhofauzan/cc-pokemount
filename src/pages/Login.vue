@@ -1,11 +1,11 @@
 <template>
     <div>
-        pokemount index
+        pokemount login
     </div>
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+// import { reactive, toRefs } from 'vue'
 
 export default {
     // setup () {

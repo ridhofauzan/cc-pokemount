@@ -1,5 +1,5 @@
 <template>
-  <div>Loading component...</div>
+  <div>Please Wait...</div>
 </template>
 
 <script>

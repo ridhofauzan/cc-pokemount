@@ -1,27 +1,26 @@
 <template>
     <div class="poke-wrap">
         <div v-if="error">{{ error }}</div>
-        <AsyncUser v-for="pokemon in pokemons.results" :pokemon="pokemon" :key="pokemon.id" />
+        <AsyncPokemon v-for="pokemon in pokemons.results" :pokemon="pokemon" :key="pokemon.id" />
     </div>
 </template>
 
 <script>
 import { defineAsyncComponent } from "vue";
 import Loading from "./Loading.vue";
-// import ItemBox from './../components/ItemBox.vue'
 import usePokemon from '@/modules/usePokemon'
         
-const AsyncUser = defineAsyncComponent({
-  loader: () => import("./ItemBox.vue" /* webpackChunkName: "user" */),
+const AsyncPokemon = defineAsyncComponent({
+  loader: () => import("./PokedexBox.vue" /* webpackChunkName: "user" */),
   loadingComponent: Loading,
   delay: 200,
   suspensible: false
 });
 
 export default {
-    name: "ItemList",
+    name: "PokedexList",
     components: {
-        AsyncUser
+        AsyncPokemon
     },
     async setup() {
         const { pokemons, error, load } = usePokemon()

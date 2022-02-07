@@ -9,9 +9,9 @@ export default function usePokemonDetail() {
     })
     const load = async(param) => {
         try {
-            const response = await fetch('https://pokeapi.co/api/v2/pokemon/', param)
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${param}`)
             state_pokemon_detail.pokemon_detail = await response.json();
-            
+            console.log(state_pokemon_detail.pokemon_detail)
         } catch (e) {
             state_pokemon_detail.error = e;
         }
