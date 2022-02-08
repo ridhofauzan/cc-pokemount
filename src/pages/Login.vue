@@ -1,25 +1,42 @@
 <template>
-    <div>
-        pokemount login
+    <div class="poke-wrap">
+        <PokeLogin />
     </div>
 </template>
 
 <script>
 // import { reactive, toRefs } from 'vue'
+import PokeLogin from '@/components/PokeLogin.vue'
 
 export default {
-    // setup () {
-    //     const state = reactive({
-    //         count: 0,
-    //     })
-    
-    //     return {
-    //         ...toRefs(state),
-    //     }
-    // }
+    components: {
+        PokeLogin
+    }
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+$small: 325px;
+$medium: 700px;
+.poke {
+    &-wrap {
+        max-width: 100%;
+        display: block;
+        clear: both;
+        &::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        @media screen and (max-width: $small) {
+            max-width: 100%;
+        }
+        @media screen and (min-width: $medium) {
+            max-width: 426px;                  
+        }
+       
+        margin: 20px auto;
+    }
+    
+}
 </style>

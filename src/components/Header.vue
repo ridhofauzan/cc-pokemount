@@ -4,14 +4,29 @@
             <img class="poke-logo__img" src="./../assets/logo/pokemon.png" alt="">
         </div>
         <ul class="poke-menu">
-            <li><router-link to="/">Pokedex</router-link></li>
-            <li><router-link to="/login">Login</router-link></li>
+            <li v-if="isAuth"><router-link to="/">Pokedex</router-link></li>
+            <li v-if="isAuth"><a href="#" @click="doLogoutPush">Logout</a></li>
+            <li v-if="!isAuth"><router-link to="/login">Login</router-link></li>
         </ul> 
     </div>
 </template>
 
-<script setup>
+<script>
+import useLogin from '@/modules/useLogin'
+import { useRouter } from 'vue-router'
+export default {
+  setup() {
+    const { isAuth, doLogout } = useLogin()
+    const router = useRouter()
 
+    const doLogoutPush = () => {
+      doLogout()
+      router.push({ name: 'Login' })
+    }
+
+    return { isAuth, doLogout, doLogoutPush }
+  }
+}
 </script>
 
 <style lang="scss">

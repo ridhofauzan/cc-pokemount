@@ -37,8 +37,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    const isAuth = JSON.parse(localStorage.getItem('authenticated'));
     document.title = `${to.meta.title}`;
-    next();
+    if(to.name !== "Login" && !isAuth) next({ name: "Login" });
+    if(to.name === "Login" && isAuth) next({ name: "Pokedex" });
+    else next();
+    
 });
 
 export default router

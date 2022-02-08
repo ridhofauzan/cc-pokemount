@@ -6,12 +6,10 @@
                 {{ convStrCamel(pokemon.name) }}
             </div>
         </div>
-        <!-- <ItemDetail v-if=""/> -->
     </router-link>
 </template>
 
 <script>
-// import ItemDetail from './ItemDetail.vue'
 import usePokemonDetail from '@/modules/usePokemonDetail'
 import StringFilter from '../mixins/string-filter'
 export default {
@@ -21,7 +19,6 @@ export default {
         pokeId: Number
     },
     components: {
-        // ItemDetail
     },
     async setup(props) {
         const { pokemon_detail, error, load } = usePokemonDetail()
