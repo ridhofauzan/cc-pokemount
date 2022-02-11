@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
 import Login from '../pages/Login.vue'
+import Register from '../pages/Register.vue'
 import Pokedex from '../pages/Pokedex.vue'
 import PokedexDetail from '../pages/PokedexDetail.vue'
 
@@ -28,6 +29,14 @@ const routes = [
         meta: {
             title: "POKEMOUNT | Login"
         },
+    },
+    {
+        path: "/register",
+        name: "Register",
+        component: Register,
+        meta: {
+            title: "POKEMOUNT | Register"
+        },
     }
 ];
 
@@ -37,11 +46,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const isAuth = JSON.parse(localStorage.getItem('authenticated'));
+    // const isAuth = JSON.parse(localStorage.getItem('authenticated'));
     document.title = `${to.meta.title}`;
-    if(to.name !== "Login" && !isAuth) next({ name: "Login" });
-    if(to.name === "Login" && isAuth) next({ name: "Pokedex" });
-    else next();
+    // if(to.name !== "Login" && !isAuth) next({ name: "Login" });
+    // if(to.name === "Login" && isAuth) next({ name: "Pokedex" });
+     next();
     
 });
 

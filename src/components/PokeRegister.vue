@@ -1,9 +1,9 @@
 <template>
     <div class="poke-detail-box">
         <div class="poke-detail-box__title">
-            Login
+            Register
         </div>
-        <form @submit.prevent="doLogin">
+        <form @submit.prevent="doRegister">
             <div class="poke-detail-box-group">
                 <div class="poke-detail__label">Email</div>
                 <input type="text" class="poke-detail__input" placeholder="Masukkan Email" v-model="email">
@@ -13,32 +13,31 @@
                 <input type="password" class="poke-detail__input" placeholder="Masukkan Password" v-model="password">
             </div>
             <div class="poke-detail-box-group">
-                <input type="submit" class="poke-detail__btn" value="Login">
+                <input type="submit" class="poke-detail__btn" value="Register">
             </div>
         </form>
-        <p class="poke-bottom">Not registered yet? <router-link to="/register">Register Here</router-link></p>
+        <p class="poke-bottom">Already Registered? <router-link to="/login">Login Here</router-link></p>
     </div>
 </template>
 
 <script>
 import { ref } from 'vue'
 import firebase from 'firebase'
-// import { useRouter } from 'vue-router'
+
 export default {
     setup() {
         const email = ref('')
         const password = ref('')
-        // const router = useRouter();
 
-        const doLogin = () => {
+        const doRegister = () => {
             firebase
                 .auth()
-                .signInWithEmailAndPassword(email.value, password.value)
-                .then(data => console.log(data))
+                .createUserWithEmailAndPassword(email.value, password.value)
+                .then(user => alert(user))
                 .catch(err => alert(err.message))
         }
 
-        return { doLogin, email, password }
+        return { doRegister, email, password }
     }
 }
 </script>
